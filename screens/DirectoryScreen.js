@@ -1,10 +1,12 @@
+//DirectoryScreen.js: Takes the campsite data and displays each one in a list format, with images and descriptions.
+
 import { FlatList } from "react-native";
 import { Avatar, ListItem } from "react-native-elements";
 
 const DirectoryScreen = (props) => {
   const renderDirectoryItem = ({ item: campsite }) => {
     return (
-      <ListItem>
+      <ListItem onPress={() => props.onPress(campsite.Id)}>
         <Avatar source={campsite.image} rounded />
         <ListItem.Content>
           <ListItem.Title>{campsite.name}</ListItem.Title>
