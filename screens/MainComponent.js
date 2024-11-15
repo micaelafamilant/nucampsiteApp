@@ -16,6 +16,12 @@ import ContactScreen from "./ContactScreen";
 import { StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 import logo from "../assets/images/logo.png";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchCampsites } from "../features/campsites/campsitesSlice";
+import { fetchComments } from "../features/comments/commentsSlice";
+import { fetchPromotions } from "../features/promotions/promotionsSlice";
+import { fetchPartners } from "../features/partners/partnersSlice";
 
 const Drawer = createDrawerNavigator();
 
@@ -139,6 +145,15 @@ const CustomDrawerContent = (props) => (
 );
 
 const Main = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCampsites());
+    dispatch(fetchComments());
+    dispatch(fetchPromotions());
+    dispatch(fetchPartners());
+  }, [dispatch]);
+
   return (
     <View
       style={{
