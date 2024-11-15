@@ -1,12 +1,25 @@
-//DirectoryScreen.js: Takes the campsite data and displays each one in a list format, with images and descriptions.
+//DirectoryScreen.js: Takes the campsite data and displays each one in a list/tile format, with images and descriptions.
 
-import { FlatList } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { Tile } from "react-native-elements";
 import { useSelector } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
+import Loading from "../components/LoadingComponent";
 
 const DirectoryScreen = ({ navigation }) => {
   const campsites = useSelector((state) => state.campsites);
+
+  if (campsites.isLoading) {
+    return <Loading />;
+  }
+
+  if (campsites.errMess) {
+    return (
+      <View>
+        <Text>{campsites.errMess}</Text>
+      </View>
+    );
+  }
 
   const renderDirectoryItem = ({ item: campsite }) => {
     return (
