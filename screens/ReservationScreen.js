@@ -119,7 +119,7 @@ const ReservationScreen = () => {
 
 const styles = StyleSheet.create({
   formRow: {
-    alignitems: "center",
+    alignItems: "center",
     justifyContent: "center",
     flex: 1,
     flexDirection: "row",
