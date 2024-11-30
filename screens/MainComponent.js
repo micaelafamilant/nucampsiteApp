@@ -25,6 +25,8 @@ import { fetchPartners } from "../features/partners/partnersSlice";
 import ReservationScreen from "./ReservationScreen";
 import FavoritesScreen from "./FavoritesScreen";
 import LoginScreen from "./LoginScreen";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/core";
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
 
 const Drawer = createDrawerNavigator();
 
@@ -160,15 +162,20 @@ const LoginNavigator = () => {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={({ navigation }) => ({
+        options={({ navigation, route }) => ({
           headerLeft: () => (
             <Icon
-              name="sign-in"
+              name={
+                getFocusedRouteNameFromRoute(route) === "Register"
+                  ? "user-plus"
+                  : "sign-in"
+              }
               type="font-awesome"
               iconStyle={styles.stackIcon}
               onPress={() => navigation.toggleDrawer()}
             />
           ),
+          headerTitle: getFocusedRouteNameFromRoute(route),
         })}
       />
     </Stack.Navigator>
